@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 class Main extends React.Component {
   constructor(props) {
@@ -8,16 +10,16 @@ class Main extends React.Component {
       imageURL: '',
     };
 
-    this.handleUploadImage = this.handleUploadImage.bind(this);
+    this.handleUploadFile = this.handleUploadFile.bind(this);
   }
 
-  handleUploadImage(ev) {
+  handleUploadFile(ev) {
     ev.preventDefault();
 
     const data = new FormData();
     data.append('file', this.uploadInput.files[0]);
     data.append('filename', this.fileName.value);
-
+    //data.append('filename', this.refs.fileName.input.value);
     fetch('http://localhost:8000/upload', {
       method: 'POST',
       body: data,
@@ -30,16 +32,28 @@ class Main extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleUploadImage}>
+      <form onSubmit={this.handleUploadFile}>
         <div>
-          <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
+          <input ref={(ref) => { this.uploadInput = ref; }}
+            accept="*.jmx"
+            id="contained-button-file"
+            multiple
+            type="file"
+          />        
         </div>
+        
         <div>
-          <input ref={(ref) => { this.fileName = ref; }} type="text" required placeholder="Enter the desired name of file" />
+          <TextField
+            label="Nome do Arquio"
+            inputRef={ref => (this.fileName = ref)}            
+            type="text"
+            margin="normal"
+            required="true"
+          />
         </div>
-        <br />
+              
         <div>
-          <button>Upload</button>
+          <Button type="submit" variant="contained" color="primary">Upload</Button>
         </div>
         
       </form>
