@@ -20,12 +20,12 @@ class Main extends React.Component {
     data.append('file', this.uploadInput.files[0]);
     data.append('filename', this.fileName.value);
     //data.append('filename', this.refs.fileName.input.value);
-    fetch('https://uploadbackend:8000/upload', {
+    fetch('https://uploadbackend.paas.sulamerica.br/upload', {
       method: 'POST',
       body: data,
     }).then((response) => {
       response.json().then((body) => {
-        this.setState({ imageURL: `https://uploadbackend:8000/${body.file}` });
+        this.setState({ imageURL: `https://uploadbackend.paas.sulamerica.br/${body.file}` });
       });
     });
   }
