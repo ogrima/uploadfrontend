@@ -41,9 +41,10 @@ class Main extends React.Component {
 
   render() {
     return (
-
+    
     <Paper className="paper" >
- <form onSubmit={this.handleUploadFile}>
+ <span> {process.env.REACT_APP_PROJECT_VERSION} </span> 
+  <form onSubmit={this.handleUploadFile}>
         <div>
           <input ref={(ref) => { this.uploadInput = ref; }}
             accept="*.jmx"
